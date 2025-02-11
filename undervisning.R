@@ -20,6 +20,9 @@ unique(vwpas$dealer_type)
 
 cols <- c("Privat" = "blue", "Forhandler" = "orange")
 
+
+# Visualisering fra undervisning
+
 ggplot(vwpas, aes(x = km_per_liter, y = price, size = motor_size, colour = dealer_type)) +
   geom_point(alpha = 0.3) +
   scale_color_manual(values = cols) +
@@ -35,4 +38,22 @@ ggplot(vwpas, aes(x = km_per_liter, y = price, size = motor_size, colour = deale
                   size = 3,
                   colour = "black")
   
+# Jazzet lidt op
+
+ggplot(vwpas, aes(x = km_per_liter, y = price, size = motor_size, colour = dealer_type)) +
+  geom_point(alpha = 0.1) +
+  scale_color_manual(values = cols) +
+  labs(x = "Kilometer på literen",
+       y = "Pris",
+       title = "Det er billigere hos private end forhandler",
+       subtitle = "Men det vidste vi godt",
+       caption = "Data er hapset fra bilbasen.dk") +
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  geom_text_repel(aes(label = ifelse(motor_size>1.5 & year>2014, as.character(car),'')),
+                  hjust = 1, vjust = 0,
+                  size = 3,
+                  colour = "black") +
+  geom_point(data = vwpas %>% 
+               filter(motor_size>1.5 & year>2014))
 
