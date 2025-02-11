@@ -57,3 +57,5 @@ ggplot(vwpas, aes(x = km_per_liter, y = price, size = motor_size, colour = deale
   geom_point(data = vwpas %>% 
                filter(motor_size>1.5 & year>2014))
 
+
+
